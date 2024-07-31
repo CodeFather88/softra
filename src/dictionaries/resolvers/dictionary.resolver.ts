@@ -1,7 +1,7 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { DictionaryService } from '../services/dictionary.service'
 import { DictionaryEntity } from '../entities/dictionary.entity'
-import { CreateDictionaryInput } from '../inputs/create-dictionary.input'
+import { CreateDictionaryInput } from '../inputs/dictionary/create-dictionary.input'
 
 @Resolver('Dictionary')
 export class DictionaryResolver {

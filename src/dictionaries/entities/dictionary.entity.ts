@@ -1,22 +1,27 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
-import { Field, ID, ObjectType } from '@nestjs/graphql'
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { DictionaryRecordEntity } from './dictionary-record.entity';
 
 @ObjectType()
 @Entity('dictionaries')
 export class DictionaryEntity {
 	@Field(() => ID)
 	@PrimaryGeneratedColumn()
-	id: number
+	id: number;
 
 	@Field()
 	@CreateDateColumn()
-	createdAt: Date
+	createdAt: Date;
 
 	@Field()
 	@UpdateDateColumn()
-	updatedAt: Date
+	updatedAt: Date;
 
 	@Field({ nullable: true })
 	@Column({ nullable: true })
-	name: string
+	name: string;
+
+	@Field(() => [DictionaryRecordEntity], { nullable: true })
+	@OneToMany(() => DictionaryRecordEntity, record => record.dictionary, { cascade: true, onDelete: 'CASCADE' })
+	records: DictionaryRecordEntity[];
 }

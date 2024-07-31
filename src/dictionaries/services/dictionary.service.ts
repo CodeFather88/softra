@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { DictionaryEntity } from "../entities/dictionary.entity";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateDictionaryInput } from "../inputs/create-dictionary.input";
+import { CreateDictionaryInput } from "../inputs/dictionary/create-dictionary.input";
 
 @Injectable()
 export class DictionaryService {
