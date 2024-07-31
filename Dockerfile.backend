@@ -1,23 +1,17 @@
-# Используем конкретную версию Node.js
-FROM node:18
+# Используем базовый образ Node.js с предустановленным npm
+FROM node:18-alpine-slim
 
-# Создаем рабочий каталог
 WORKDIR /app
 
-# Копируем package.json и yarn.lock файлы
-COPY package.json yarn.lock ./
+# Копируем package.json и устанавливаем зависимости с помощью npm
+COPY package.json ./
+RUN npm install
 
-# Устанавливаем зависимости
-RUN yarn install
-
-# Копируем остальные файлы
+# Копируем остальные файлы проекта
 COPY . .
 
-# Собираем проект, если это необходимо
-RUN yarn build
+# Экспозиция порта
+EXPOSE 3030
 
-# Открываем порт для приложения
-EXPOSE 3000
-
-# Команда для запуска приложения в production
-CMD ["yarn", "start"]
+# Команда для запуска приложения
+CMD ["npm", "start"]

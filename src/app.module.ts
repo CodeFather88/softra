@@ -8,7 +8,7 @@ import { DictionaryModule } from './dictionaries/dictionaries.module'
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, envFilePath: '../.env' }),
+    ConfigModule.forRoot({ isGlobal: true }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: 'schema.gql',
       sortSchema: true,
@@ -20,10 +20,10 @@ import { DictionaryModule } from './dictionaries/dictionaries.module'
       inject: [ConfigService],
       useFactory: async (config: ConfigService) => ({
         type: 'postgres',
-        username: 'admin',
-        password: 'admin',
-        database: 'softra',
-        port: 5432,
+        username: config.get('TYPEORM_USERNAME'),
+        password: config.get('TYPEORM_PASSWORD'),
+        database: config.get('TYPEORM_DATABASE'),
+        port: config.get('TYPEORM_PORT'),
         entities: [__dirname + 'dist/**/*.entity{.ts,.js}'],
         migrations: [__dirname + '/src/migrations/*{.ts,.js}'],
         synchronize: true, //изменить на false
@@ -35,5 +35,5 @@ import { DictionaryModule } from './dictionaries/dictionaries.module'
   ],
   providers: [],
 })
-export class AppModule {
-}
+
+export class AppModule { }
