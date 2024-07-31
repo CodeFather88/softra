@@ -2,6 +2,7 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { DictionaryService } from '../services/dictionary.service'
 import { DictionaryEntity } from '../entities/dictionary.entity'
 import { CreateDictionaryInput } from '../inputs/dictionary/create-dictionary.input'
+import { UpdateDictionaryInput } from '../inputs/dictionary/update-dictionary.input'
 
 @Resolver('Dictionary')
 export class DictionaryResolver {
@@ -13,6 +14,11 @@ export class DictionaryResolver {
     @Mutation(() => DictionaryEntity)
     async createDictionary(@Args('createDictionary') createDictionaryInput: CreateDictionaryInput): Promise<DictionaryEntity> {
         return await this.dictionaryService.createDictionary(createDictionaryInput)
+    }
+
+    @Mutation(() => DictionaryEntity)
+    async updateDictionary(@Args('updateDictionary') updateDictionaryInput: UpdateDictionaryInput): Promise<DictionaryEntity> {
+        return await this.dictionaryService.updateDictionary(updateDictionaryInput)
     }
 
     @Mutation(() => Number)

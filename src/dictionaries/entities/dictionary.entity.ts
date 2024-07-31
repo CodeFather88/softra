@@ -21,7 +21,6 @@ export class DictionaryEntity {
 	@Column({ nullable: true })
 	name: string;
 
-	@Field(() => [DictionaryRecordEntity], { nullable: true })
 	@OneToMany(() => DictionaryRecordEntity, record => record.dictionary, { cascade: true, onDelete: 'CASCADE' })
 	records: DictionaryRecordEntity[];
 }

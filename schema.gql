@@ -3,7 +3,14 @@
 # ------------------------------------------------------
 
 input CreateDictionaryInput {
-  name: String
+  name: String!
+}
+
+input CreateDictionaryRecordInput {
+  color: DictionaryRecordColor!
+  dictionaryId: ID!
+  name: String!
+  value: String!
 }
 
 """
@@ -18,12 +25,47 @@ type DictionaryEntity {
   updatedAt: DateTime!
 }
 
+"""Цвет записи в словаре"""
+enum DictionaryRecordColor {
+  Blue
+  Green
+  Red
+  Yellow
+}
+
+type DictionaryRecordEntity {
+  color: DictionaryRecordColor!
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  updatedAt: DateTime!
+  value: String!
+}
+
 type Mutation {
   createDictionary(createDictionary: CreateDictionaryInput!): DictionaryEntity!
+  createDictionaryRecord(createDictionaryRecordInput: CreateDictionaryRecordInput!): DictionaryRecordEntity!
   removeDictionary(id: Float!): Float!
+  removeDictionaryRecord(id: Float!): Float!
+  updateDictionary(updateDictionary: UpdateDictionaryInput!): DictionaryEntity!
+  updateDictionaryRecord(createDictionaryRecordInput: UpdateDictionaryRecordInput!): DictionaryRecordEntity!
 }
 
 type Query {
+  getAllDictionaryRecords(dictionaryId: Float!): [DictionaryRecordEntity!]!
   getAllDictionarys: [DictionaryEntity!]!
   getOneDictionary(id: Float!): DictionaryEntity!
+  getOneDictionaryRecord(id: Float!): DictionaryRecordEntity!
+}
+
+input UpdateDictionaryInput {
+  id: ID!
+  name: String!
+}
+
+input UpdateDictionaryRecordInput {
+  color: DictionaryRecordColor
+  id: ID!
+  name: String
+  value: String
 }

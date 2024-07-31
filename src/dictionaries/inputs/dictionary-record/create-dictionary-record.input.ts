@@ -1,4 +1,4 @@
-import { Field, InputType, Int } from '@nestjs/graphql'
+import { Field, ID, InputType, Int, registerEnumType } from '@nestjs/graphql'
 import { DictionaryRecordColor } from '@shared/enums';
 
 @InputType()
@@ -13,6 +13,11 @@ export class CreateDictionaryRecordInput {
     @Field(() => DictionaryRecordColor)
     color: DictionaryRecordColor;
 
-    @Field(() => Int)
+    @Field(() => ID)
     dictionaryId: number
 }
+
+registerEnumType(DictionaryRecordColor, {
+    name: 'DictionaryRecordColor',
+    description: 'Цвет записи в словаре'
+});

@@ -33,7 +33,6 @@ export class DictionaryRecordEntity {
 	})
 	color: DictionaryRecordColor;
 
-	@Field(() => DictionaryEntity)
-	@ManyToOne(() => DictionaryEntity, dictionary => dictionary.records)
+	@ManyToOne(() => DictionaryEntity, dictionary => dictionary.records, { onDelete: 'CASCADE' })
 	dictionary: DictionaryEntity;
 }
