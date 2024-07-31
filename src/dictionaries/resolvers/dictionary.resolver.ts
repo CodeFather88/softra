@@ -12,7 +12,6 @@ export class DictionaryResolver {
 
     @Mutation(() => DictionaryEntity)
     async createDictionary(@Args('createDictionary') createDictionaryInput: CreateDictionaryInput): Promise<DictionaryEntity> {
-        console.log(createDictionaryInput)
         return await this.dictionaryService.createDictionary(createDictionaryInput)
     }
 

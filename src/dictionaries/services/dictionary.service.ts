@@ -11,10 +11,8 @@ export class DictionaryService {
         private readonly dictionaryRepository: Repository<DictionaryEntity>,
     ) { }
 
-    async createDictionary(createUserInput: CreateDictionaryInput): Promise<DictionaryEntity> {
-        const result = await this.dictionaryRepository.save({ ...createUserInput })
-        console.log({ result })
-        return result
+    async createDictionary(createDictionaryInput: CreateDictionaryInput): Promise<DictionaryEntity> {
+        return await this.dictionaryRepository.save({ ...createDictionaryInput })
     }
 
     async getOneDictionary(id: number): Promise<DictionaryEntity> {

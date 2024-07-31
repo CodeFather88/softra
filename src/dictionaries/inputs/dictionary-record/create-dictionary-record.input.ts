@@ -2,12 +2,12 @@ import { Field, InputType, Int } from '@nestjs/graphql'
 import { DictionaryRecordColor } from '@shared/enums';
 
 @InputType()
-export class CreateDictionaryInput {
+export class CreateDictionaryRecordInput {
 
-    @Field()
+    @Field(() => String)
     name: string
 
-    @Field()
+    @Field(() => String)
     value: string
 
     @Field(() => DictionaryRecordColor)
