@@ -19,8 +19,14 @@ export class DictionaryRecordService {
         return await this.dictionaryRecordRepository.findOne({ where: { id } })
     }
 
-    async getAllDictionaryRecords(): Promise<DictionaryRecordEntity[]> {
-        return await this.dictionaryRecordRepository.find()
+    async getAllDictionaryRecords(dictionaryId: number): Promise<DictionaryRecordEntity[]> {
+        return await this.dictionaryRecordRepository.find({
+            where: {
+                dictionary: {
+                    id: dictionaryId
+                }
+            }
+        })
     }
 
     async removeDictionaryRecord(id: number): Promise<number> {

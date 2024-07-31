@@ -25,7 +25,7 @@ export class DictionaryRecordResolver {
     }
 
     @Query(() => [DictionaryRecordEntity])
-    async getAllDictionaryRecords(): Promise<DictionaryRecordEntity[]> {
-        return await this.dictionaryRecordService.getAllDictionaryRecords();
+    async getAllDictionaryRecords(@Args('dictionaryId') dictionaryId: number): Promise<DictionaryRecordEntity[]> {
+        return await this.dictionaryRecordService.getAllDictionaryRecords(dictionaryId);
     }
 }
