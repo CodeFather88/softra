@@ -1,17 +1,11 @@
-# Используем базовый образ Node.js с предустановленным npm
-FROM node:18-alpine-slim
+FROM node:18
 
 WORKDIR /app
 
-# Копируем package.json и устанавливаем зависимости с помощью npm
-COPY package.json ./
-RUN npm install
+COPY package.json yarn.lock ./
+RUN yarn install
 
-# Копируем остальные файлы проекта
 COPY . .
+EXPOSE 3000
 
-# Экспозиция порта
-EXPOSE 3030
-
-# Команда для запуска приложения
-CMD ["npm", "start"]
+CMD yarn start 

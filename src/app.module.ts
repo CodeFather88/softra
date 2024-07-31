@@ -20,6 +20,7 @@ import { DictionaryModule } from './dictionaries/dictionaries.module'
       inject: [ConfigService],
       useFactory: async (config: ConfigService) => ({
         type: 'postgres',
+        host: config.get('TYPEORM_HOST'),
         username: config.get('TYPEORM_USERNAME'),
         password: config.get('TYPEORM_PASSWORD'),
         database: config.get('TYPEORM_DATABASE'),
