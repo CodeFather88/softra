@@ -1,0 +1,7 @@
+FROM postgres:14.0-alpine
+
+# Обновляем индекс пакетов и устанавливаем необходимые пакеты
+RUN apk update && apk add --no-cache postgresql-contrib
+
+# Копируем ваши SQL файлы в каталог инициализации базы данных
+ADD *.sql /docker-entrypoint-initdb.d/

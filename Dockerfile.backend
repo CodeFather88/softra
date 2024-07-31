@@ -1,0 +1,23 @@
+# Используем конкретную версию Node.js
+FROM node:18
+
+# Создаем рабочий каталог
+WORKDIR /app
+
+# Копируем package.json и yarn.lock файлы
+COPY package.json yarn.lock ./
+
+# Устанавливаем зависимости
+RUN yarn install
+
+# Копируем остальные файлы
+COPY . .
+
+# Собираем проект, если это необходимо
+RUN yarn build
+
+# Открываем порт для приложения
+EXPOSE 3000
+
+# Команда для запуска приложения в production
+CMD ["yarn", "start"]
