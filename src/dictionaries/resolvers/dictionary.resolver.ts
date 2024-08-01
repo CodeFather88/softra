@@ -32,7 +32,7 @@ export class DictionaryResolver {
     }
 
     @Query(() => [DictionaryEntity])
-    async getAllDictionarys(): Promise<DictionaryEntity[]> {
+    async getAllDictionaries(): Promise<DictionaryEntity[]> {
         return await this.dictionaryService.getAllDictionaries()
     }
 }
